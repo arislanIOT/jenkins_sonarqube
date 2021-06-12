@@ -1,0 +1,38 @@
+version: "3"
+services:
+    sonarqube:
+        image: sonarqube:community
+
+        ports:
+            - 9000:9000
+        depends_on:
+            - pgsql
+        env_file:
+            - .env_sonarqubeserver
+        volumes:
+            - sonarqube_data:/opt/sonarqube/data 
+            - sonarqube_extensions:/opt/sonarqube/extentions
+            - sonarqube_logs:/opt/sonarqube/logs 
+
+        networks:
+            - sonarnet
+    pgsql:
+        image: postgres
+        env_file:
+            - .env_pgsql
+        networks:
+            - sonarnet
+        volumes:
+            - postgres_data:/var/lib/postgresql
+            - postgresql:/var/lib/postgresql
+
+networks:
+    sonarnet:
+        driver: bridge
+
+volumes:
+    postgres_data:
+    postgresql:
+    sonarqube_data:
+    sonarqube_extensions:
+    sonarqube_logs:

@@ -1,0 +1,12 @@
+version: "3"
+services:
+    sonar_scanner:
+        image: sonarsource/sonar-scanner-cli
+        volumes:
+            - scan_jenki:/usr/src 
+        env_file:
+            - .env_scanner
+
+volumes:
+    scan_jenki:
+

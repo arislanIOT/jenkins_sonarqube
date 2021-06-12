@@ -1,0 +1,11 @@
+version: "3"
+services:
+    jen_kins:
+        image: jenkins:latest 
+        ports:
+            - 8080:8080
+        volumes:
+            - jenkins_data:/var/jenkins_home
+volumes:
+    -jenkins_data:
+
